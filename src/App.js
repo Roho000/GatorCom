@@ -1,122 +1,101 @@
 import React, { Component } from "react";
-import cookie from "react-cookies";
+import * as ReactDOM from 'react-dom';
 import './App.css';
+import { Chat } from '@progress/kendo-react-conversational-ui';
+import { Input } from '@progress/kendo-react-inputs';
 
-import { googleTranslate } from "./utils/googleTranslate";
+
+function MessageTemplate(props) {
+    return (
+        <div className="k-bubble">
+            <div>{props.item.text}</div>
+        </div>
+    );
+}
 
 class App extends Component {
-  constructor() {
-    super();
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  
-  state = {
-    textAreaValue: "",
-    languageCodes: [],
-    language: cookie.load("language") ? cookie.load("language") : "en",
-    question: cookie.load("question")
-      ? cookie.load("question")
-      : "What language do you prefer to read with?"
-  };
-
-  componentDidMount() {
-    // load all of the language options from Google Translate to your app state
-
-    googleTranslate.getSupportedLanguages("en", function(err, languageCodes) {
-      getLanguageCodes(languageCodes); // use a callback function to setState
-    });
-
-    const getLanguageCodes = languageCodes => {
-      this.setState({ languageCodes });
-    };
-  }
-
-  handleChange(event) {
-    this.setState({ textAreaValue: event.target.value });
-    console.log(event.target.value);
-  }
-
-  handleSubmit(event) {
-    console.log(this.state.value);
-    event.preventDefault();
-  }
-
-  render() {
-    const { languageCodes, language, question } = this.state;
-    const divStyle = {
-      // display: "flex",
-      alignItems: "center",
-      textAlign: "center",
-      // height: "100vh",
-      // width: "100wh"
-      // backgroundColor: 'yellow',
-    };
-    const header = {
-      textAlign: "center",
-    };
-    return (
-      <div style={divStyle}>
-        <h1 style={header}>GatorCom</h1>
-        <p>Enter text:</p>
-
-        {/* <form onSubmit={this.handleSubmit}> */}
-          <div>
-            {/* <label>Enter value : </label> */}
-            <textarea
-              value={this.state.textAreaValue}
-              onChange={this.handleChange}
-              rows={15}
-              cols={40}
-            />
-          </div>
-          
-          {/* <input type="submit" value="Submit" />
-        </form> */}
-
-        <p>{question}</p>
-
-        {/* iterate through language options to create a select box */}
-        <select
-          className="select-language"
-          value={language}
-          onChange={e => this.changeHandler(e.target.value)}
-        >
-          {languageCodes.map(lang => (
-            <option key={lang.language} value={lang.language}>
-              {lang.name}
-            </option>
-          ))}
-        </select>
-      </div>
-    );
-  }
-
-  changeHandler = language => {
-    let { question } = this.state;
-    let cookieLanguage = cookie.load("language");
-    let transQuestion = "";
-
-    const translating = transQuestion => {
-      if (question !== transQuestion) {
-        this.setState({ question: transQuestion });
-        cookie.save("question", transQuestion, { path: "/" });
-      }
-    };
-
-    // translate the question when selecting a different language
-    if (language !== cookieLanguage) {
-      googleTranslate.translate(question, language, function(err, translation) {
-        transQuestion = translation.translatedText;
-        translating(transQuestion);
-      });
+    constructor(props) {
+        super(props);
+        // this.addUser1 = this.addUser1.bind(this);
+        this.state = {
+            userName1: "",
+            userName2: "x",
+            messages: [
+              // {
+              //       author: this.user2,
+              //       timestamp: new Date(),
+              //       text: "Hello, this is a demo bot. I don't do much, but I can count symbols!"
+              //   }
+              ],
+              // user1: {
+              //   id: 1,
+              //   name: "A"
+              // },
+              // user2: {
+              //   id: 0,
+              //   name: "B"
+              // }
+        };
+        this.user = {
+          id: 1,
+          name: "v",
+          // avatarUrl: "https://via.placeholder.com/24/008000/008000.png"
+      };
+      this.user2 = { 
+        id: 0,
+        name: "v",
+       };
     }
 
-    this.setState({ language });
-    cookie.save("language", language, { path: "/" });
-  };
-  
-  
+    addNewMessage = event => {
+        this.setState((prevState) => {
+            return { messages: [...prevState.messages, event.message] };
+        });
+    };
+
+    addUser1 = event => {
+      // this.user.name="asd";
+      this.setState({userName1: event.target.value});
+      // this.setState({user1: {id: 1, name: event.target.value});
+      console.log(event.target.value);
+      // this.setState({user.name: event.target.value});
+      // this.setState({this.user.name: "hello"});
+    }
+
+    render() {
+      const header = {
+        textAlign: "center",
+      };  
+      return (
+            <div>
+                <h1 style={header}>GatorCom</h1>
+                <div className='rowC'>
+                  <div>
+                    <Input label="Enter first name" type="text" value={this.state.userName1} onChange={this.addUser1}/>
+                    <Input readOnly value="English" />
+                    <Chat user={this.user1}
+                        messages={this.state.messages}
+                        onMessageSend={this.addNewMessage}
+                        width={400}
+                        messageTemplate={MessageTemplate}>
+                    </Chat>
+                  </div>
+                  <div>
+                    <Input label="Enter first name" />
+                    <Input  readOnly value="Spanish" />
+                    <Chat user={this.user2}
+                        messages={this.state.messages}
+                        onMessageSend={this.addNewMessage}
+                        width={400}
+                        messageTemplate={MessageTemplate}>
+                    </Chat>
+                  </div>
+                </div>
+            </div>
+        );
+    }
 }
+
+
 
 export default App;
