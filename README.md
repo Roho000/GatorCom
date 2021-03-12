@@ -1,12 +1,12 @@
-# TrailTracker
+# GatorCom
 
-* Rohan Samanta
+Rohan Samanta
 
 #### Technology
 * React, KendoReact UI Library, Google Translate API
 
 #### Description
-Translation App which helps two people who speak different languages to communicate about getting directions to places in the University of Florida
+* Translation Application which helps two people who speak different languages communicate about getting directions to places in the University of Florida
 
 #### Link
 * https://github.com/Roho000/GatorCom
@@ -14,7 +14,8 @@ Translation App which helps two people who speak different languages to communic
 # Installation Guide
 
 #### Google Translate API
-I used my own Google Translate API key places in a .env file
+I used my own Google Translate API key placed in a .env file
+** REACT_APP_GOOGLE_TRANSLATE_API_KEY="MY-API-KEY" **
 
 #### Install packages
 * npm install
