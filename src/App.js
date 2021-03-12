@@ -103,6 +103,7 @@ class App extends Component {
                     <Chat user={this.state.user1}
                         messages={this.state.messages}
                         onMessageSend={this.addNewMessage}
+                        placeholder={"Type message here..."}
                         width={400}
                         messageTemplate={MessageTemplate}>
                     </Chat>
@@ -113,6 +114,7 @@ class App extends Component {
                     <Chat user={this.state.user2}
                         messages={this.state.messages2}
                         onMessageSend={this.addNewMessage2}
+                        placeholder={"Type message here..."}
                         width={400}
                         messageTemplate={MessageTemplate}>
                     </Chat>
