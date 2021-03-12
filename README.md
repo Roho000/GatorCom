@@ -14,8 +14,7 @@ Rohan Samanta
 # Installation Guide
 
 #### Google Translate API
-I used my own Google Translate API key placed in a .env file
-The contents of the .env file:
+I used my own Google Translate API key placed in a .env file that includes:
 REACT_APP_GOOGLE_TRANSLATE_API_KEY="MY-API-KEY"
 
 #### Install packages
