@@ -16,6 +16,15 @@ body {
   flex-direction:row;
 }
 
+.name{
+  height: 38px;
+}
+
+.lang{
+  height: 40px;
+  text-align: right;
+}
+
 /* .App {
   text-align: center;
 }

@@ -22,14 +22,13 @@ class App extends Component {
               // {
               //       author: this.user2,
               //       timestamp: new Date(),
-              //       text: "Hello, this is a demo bot. I don't do much, but I can count symbols!"
+              //       text: "temp text"
               //   }
               ],
           messages2: [],
           user1: {
             id: 1,
             name: "",
-            // avatarUrl: "https://via.placeholder.com/24/008000/008000.png"
           },
           user2: {
             id: 0,
@@ -43,18 +42,18 @@ class App extends Component {
       let transMess = "";
       const translating = transMess => {
           this.setState({ trans: transMess });
-          // this.setState((prevState) => {
-          //   { messages2: [...prevState.messages, event.message] };
-          // });
           event.message.text = this.state.trans;
-          this.setState((prevState) => {
-            return { messages: [...prevState.messages, event.message] };
-          });
+          this.setState((prevState) => ({
+            messages2: [...prevState.messages2, event.message] 
+          }));
       };
       googleTranslate.translate(mess, "es", function(err, translation) {
         transMess = translation.translatedText;
         translating(transMess);        
-      });      
+      });
+      this.setState((prevState) => ({
+        messages: [...prevState.messages, { author: event.message.author, text: mess, timestamp: event.message.timestamp }] 
+      }));      
     };
 
     addNewMessage2 = event => {
@@ -62,18 +61,18 @@ class App extends Component {
       let transMess = "";
       const translating = transMess => {
           this.setState({ trans: transMess });
-          // this.setState((prevState) => {
-          //   { messages2: [...prevState.messages, event.message] };
-          // });
           event.message.text = this.state.trans;
-          this.setState((prevState) => {
-            return { messages: [...prevState.messages, event.message] };
-        });
+          this.setState((prevState) => ({
+            messages: [...prevState.messages, event.message] 
+          }));
       };
       googleTranslate.translate(mess, "en", function(err, translation) {
         transMess = translation.translatedText;
         translating(transMess);        
-      });      
+      });
+      this.setState((prevState) => ({
+        messages2: [...prevState.messages2, { author: event.message.author, text: mess, timestamp: event.message.timestamp }] 
+      }));           
   };
 
     addUser1 = event => {
@@ -99,8 +98,8 @@ class App extends Component {
                 <h1 style={header}>GatorCom</h1>
                 <div className='rowC'>
                   <div>
-                    <Input label="Enter first name" type="text" onChange={this.addUser1}/>
-                    <Input readOnly value="English" />
+                    <Input className='name' label="Enter first name" type="text" onChange={this.addUser1}/>
+                    <Input className='lang' readOnly value="English" />
                     <Chat user={this.state.user1}
                         messages={this.state.messages}
                         onMessageSend={this.addNewMessage}
@@ -109,10 +108,10 @@ class App extends Component {
                     </Chat>
                   </div>
                   <div>
-                    <Input label="Enter first name" type="text" onChange={this.addUser2}/>
-                    <Input  readOnly value="Spanish"/>
+                    <Input className='name' label="Enter first name" type="text" onChange={this.addUser2}/>
+                    <Input className='lang' readOnly value="Spanish"/>
                     <Chat user={this.state.user2}
-                        messages={this.state.messages}
+                        messages={this.state.messages2}
                         onMessageSend={this.addNewMessage2}
                         width={400}
                         messageTemplate={MessageTemplate}>
