@@ -3,12 +3,29 @@ body {
   color: #ffffff;
 }
 
+.header{
+  padding-top: 20px;
+}
+
 .rowC {
   display:flex; 
   flex-direction:row;
   justify-content: center;
   align-items: center;
-  /* padding-top: 255px; */
+}
+
+.rating{
+  justify-content: center;
+  align-items: center;
+}
+
+.chat{
+  margin: 70px;
+}
+
+.chat2{
+  margin: 70px;
+  padding-bottom: 80px;
 }
 
 .rowCInput{

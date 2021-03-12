@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import './App.css';
 import { Chat } from '@progress/kendo-react-conversational-ui';
-import { Input } from '@progress/kendo-react-inputs';
+import { Input, Rating } from '@progress/kendo-react-inputs';
 import { googleTranslate } from "./utils/googleTranslate";
+import { Button } from '@progress/kendo-react-buttons';
 
 
 function MessageTemplate(props) {
@@ -93,11 +94,17 @@ class App extends Component {
       const header = {
         textAlign: "center",
       };  
+      const end = {
+        textAlign: "center",
+      };  
       return (
             <div>
-                <h1 style={header}>GatorCom</h1>
+                <h1 style={header} className="header">GatorCom</h1>
+                <div style={end}>
+                  <Button look="outline"> <a href="https://elearning.ufl.edu/supported-services/qualtrics/">End Session</a></Button>
+                </div>
                 <div className='rowC'>
-                  <div>
+                  <div className='chat'>
                     <Input className='name' label="Enter first name" type="text" onChange={this.addUser1}/>
                     <Input className='lang' readOnly value="English" />
                     <Chat user={this.state.user1}
@@ -108,13 +115,17 @@ class App extends Component {
                         messageTemplate={MessageTemplate}>
                     </Chat>
                   </div>
-                  <div>
-                    <Input className='name' label="Enter first name" type="text" onChange={this.addUser2}/>
+                  <div className='chat2'>
+                    <div className='rating'>
+                      <legend className={'k-form-legend'}>Please rate your experience:</legend>
+                      <Rating/>
+                    </div>
+                    <Input className='name' label="Ingrese el nombre" type="text" onChange={this.addUser2}/>
                     <Input className='lang' readOnly value="Spanish"/>
                     <Chat user={this.state.user2}
                         messages={this.state.messages2}
                         onMessageSend={this.addNewMessage2}
-                        placeholder={"Type message here..."}
+                        placeholder={"Escriba el mensaje aquí..."}
                         width={400}
                         messageTemplate={MessageTemplate}>
                     </Chat>
