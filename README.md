@@ -25,3 +25,6 @@ REACT_APP_GOOGLE_TRANSLATE_API_KEY="MY-API-KEY"
 * npm install @progress/kendo-react-conversational-ui
 * npm install @progress/kendo-react-inputs
 * npm install @progress/kendo-react-buttons
+
+#### Starting application
+*npm start
