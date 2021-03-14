@@ -27,4 +27,4 @@ REACT_APP_GOOGLE_TRANSLATE_API_KEY="MY-API-KEY"
 * npm install @progress/kendo-react-buttons
 
 #### Starting application
-*npm start
+* npm start
