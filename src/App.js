@@ -101,7 +101,7 @@ class App extends Component {
             <div>
                 <h1 style={header} className="header">GatorCom</h1>
                 <div style={end}>
-                  <Button look="outline"> <a href="https://elearning.ufl.edu/supported-services/qualtrics/">End Session</a></Button>
+                  <Button look="outline"> <a href="https://ufl.qualtrics.com/jfe/form/SV_51oJINWTWlHX5Ii?">End Session</a></Button>
                 </div>
                 <div className='rowC'>
                   <div className='chat'>
